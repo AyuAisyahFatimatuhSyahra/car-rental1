@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 13, 2023 at 07:59 AM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 7.4.24
+-- Host: localhost:3306
+-- Generation Time: Apr 30, 2025 at 04:39 PM
+-- Server version: 8.0.30
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `codekop_free_rental_mobil`
+-- Database: `mobing`
 --
 
 -- --------------------------------------------------------
@@ -28,17 +28,17 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `booking` (
-  `id_booking` int(11) NOT NULL,
+  `id_booking` int NOT NULL,
   `kode_booking` varchar(255) NOT NULL,
-  `id_login` int(11) NOT NULL,
-  `id_mobil` int(11) NOT NULL,
+  `id_login` int NOT NULL,
+  `id_mobil` int NOT NULL,
   `ktp` varchar(255) NOT NULL,
   `nama` varchar(255) NOT NULL,
   `alamat` varchar(255) NOT NULL,
   `no_tlp` varchar(15) NOT NULL,
   `tanggal` varchar(255) NOT NULL,
-  `lama_sewa` int(11) NOT NULL,
-  `total_harga` int(11) NOT NULL,
+  `lama_sewa` int NOT NULL,
+  `total_harga` int NOT NULL,
   `konfirmasi_pembayaran` varchar(255) NOT NULL,
   `tgl_input` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -48,9 +48,8 @@ CREATE TABLE `booking` (
 --
 
 INSERT INTO `booking` (`id_booking`, `kode_booking`, `id_login`, `id_mobil`, `ktp`, `nama`, `alamat`, `no_tlp`, `tanggal`, `lama_sewa`, `total_harga`, `konfirmasi_pembayaran`, `tgl_input`) VALUES
-(1, '1576329294', 3, 5, '231423123', 'Krisna', 'Bekasi', '08132312321', '2019-12-28', 2, 400000, 'Pembayaran di terima', '2019-12-14'),
-(2, '1576671989', 3, 5, '231423', 'Krisna Waskita', 'Bekasi Ujung Harapan', '082391273127', '2019-12-20', 2, 400525, 'Pembayaran di terima', '2019-12-18'),
-(3, '1642998828', 3, 5, '1283821832813', 'Krisna', 'Bekasi', '089618173609', '2022-01-26', 4, 800743, 'Pembayaran di terima', '2022-01-24');
+(5, '1745732360', 5, 8, '128319861801740', 'Ardya', 'Surabaya', '098899778877', '2025-04-27', 3, 3000574, 'Sedang di proses', '2025-04-27'),
+(6, '1745733089', 5, 7, '128319861801740', 'Ardya', 'Surabaya', '098899778877', '2025-04-11', 3, 750535, 'Belum Bayar', '2025-04-27');
 
 -- --------------------------------------------------------
 
@@ -59,21 +58,21 @@ INSERT INTO `booking` (`id_booking`, `kode_booking`, `id_login`, `id_mobil`, `kt
 --
 
 CREATE TABLE `infoweb` (
-  `id` int(11) NOT NULL,
-  `nama_rental` varchar(255) DEFAULT NULL,
-  `telp` varchar(15) DEFAULT NULL,
-  `alamat` text DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `no_rek` text DEFAULT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `id` int NOT NULL,
+  `nama_rental` varchar(255) NOT NULL,
+  `telp` bigint NOT NULL,
+  `alamat` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `no_rek` bigint NOT NULL,
+  `updated_at` timestamp NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `infoweb`
 --
 
 INSERT INTO `infoweb` (`id`, `nama_rental`, `telp`, `alamat`, `email`, `no_rek`, `updated_at`) VALUES
-(1, 'Rental Anang', '081298669897', 'Ujung Harapan Kab. Bekasi', 'fauzancodekop@gmail.com', 'BRI A/N Fauzan Falah 123123213123', '2022-01-24 04:57:29');
+(1, 'RentalKU', 87788998877, 'Ketintang', 'rentalkita@gmail.com', 778877887788, '2025-04-16 15:40:31');
 
 -- --------------------------------------------------------
 
@@ -82,7 +81,7 @@ INSERT INTO `infoweb` (`id`, `nama_rental`, `telp`, `alamat`, `email`, `no_rek`,
 --
 
 CREATE TABLE `login` (
-  `id_login` int(11) NOT NULL,
+  `id_login` int NOT NULL,
   `nama_pengguna` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -94,8 +93,9 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`id_login`, `nama_pengguna`, `username`, `password`, `level`) VALUES
-(1, 'Anang', 'admin', 'fe01ce2a7fbac8fafaed7c982a04e229', 'admin'),
-(3, 'Krisna Waskita', 'demo', 'fe01ce2a7fbac8fafaed7c982a04e229', 'pengguna');
+(1, 'Claria', 'admin', '25d55ad283aa400af464c76d713c07ad', 'admin'),
+(4, 'Ayu', 'syahra21', '25d55ad283aa400af464c76d713c07ad', 'pengguna'),
+(5, 'Ardya', 'ardya21', '25d55ad283aa400af464c76d713c07ad', 'pengguna');
 
 -- --------------------------------------------------------
 
@@ -104,10 +104,10 @@ INSERT INTO `login` (`id_login`, `nama_pengguna`, `username`, `password`, `level
 --
 
 CREATE TABLE `mobil` (
-  `id_mobil` int(11) NOT NULL,
+  `id_mobil` int NOT NULL,
   `no_plat` varchar(255) NOT NULL,
   `merk` varchar(255) NOT NULL,
-  `harga` int(255) NOT NULL,
+  `harga` int NOT NULL,
   `deskripsi` varchar(255) NOT NULL,
   `status` varchar(255) NOT NULL,
   `gambar` text NOT NULL
@@ -118,8 +118,8 @@ CREATE TABLE `mobil` (
 --
 
 INSERT INTO `mobil` (`id_mobil`, `no_plat`, `merk`, `harga`, `deskripsi`, `status`, `gambar`) VALUES
-(5, 'N34234', 'Avanza', 200000, 'Apa aja', 'Tidak Tersedia', '1673593078toyota-all-new-avanza-2015-tangkapan-layar_169.jpeg'),
-(6, 'N 1232 BKT', 'New Xenia', 500000, 'Baru', 'Tersedia', 'all-new-xenia-exterior-tampak-perspektif-depan---varian-1.5r-ads.jpg');
+(7, 'AE 4098 SE', 'Luxio', 250000, 'Mobil yang muat untuk 6 orang', 'Tersedia', '1744875146.jpg'),
+(8, 'R 1 A', 'Alphard', 1000000, 'Muat 8 orang', 'Tersedia', '1745194391.jpg');
 
 -- --------------------------------------------------------
 
@@ -128,22 +128,13 @@ INSERT INTO `mobil` (`id_mobil`, `no_plat`, `merk`, `harga`, `deskripsi`, `statu
 --
 
 CREATE TABLE `pembayaran` (
-  `id_pembayaran` int(11) NOT NULL,
-  `id_booking` int(255) NOT NULL,
-  `no_rekening` int(255) NOT NULL,
+  `id_pembayaran` int NOT NULL,
+  `id_booking` int NOT NULL,
+  `no_rekening` int NOT NULL,
   `nama_rekening` varchar(255) NOT NULL,
-  `nominal` int(255) NOT NULL,
+  `nominal` int NOT NULL,
   `tanggal` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `pembayaran`
---
-
-INSERT INTO `pembayaran` (`id_pembayaran`, `id_booking`, `no_rekening`, `nama_rekening`, `nominal`, `tanggal`) VALUES
-(3, 1, 2131241, 'Krisna Aldi Waskito', 400000, '2019-12-14'),
-(4, 2, 2131241, 'Krisna Aldi Waskito', 400525, '2019-12-18'),
-(5, 3, 13213, 'Fauzan Falah', 800743, '2022-01-24');
 
 -- --------------------------------------------------------
 
@@ -152,10 +143,10 @@ INSERT INTO `pembayaran` (`id_pembayaran`, `id_booking`, `no_rekening`, `nama_re
 --
 
 CREATE TABLE `pengembalian` (
-  `id_pengembalian` int(11) NOT NULL,
+  `id_pengembalian` int NOT NULL,
   `kode_booking` varchar(255) NOT NULL,
   `tanggal` varchar(255) NOT NULL,
-  `denda` int(255) NOT NULL
+  `denda` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -200,31 +191,31 @@ ALTER TABLE `pengembalian`
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `id_booking` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_booking` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `id_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_login` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `mobil`
 --
 ALTER TABLE `mobil`
-  MODIFY `id_mobil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_mobil` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_pembayaran` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `pengembalian`
 --
 ALTER TABLE `pengembalian`
-  MODIFY `id_pengembalian` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pengembalian` int NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
