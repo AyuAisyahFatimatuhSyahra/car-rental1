@@ -6,4 +6,6 @@ KELOMPOK 5 :
 3. Ayu Naila Fajarwati    23050974092 
 4. Ardya Resita Pramesti C.C.A.    23050974103
 
-https://pendidikan-ti.ft.unesa.ac.id
+Website Prodi: https://pendidikan-ti.ft.unesa.ac.id
+
+Reference : https://www.codekop.com/products/source-code-aplikasi-rental-mobil-php-mysql-7.html
